@@ -195,6 +195,7 @@ header::after {
 }
 .ability {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.45);

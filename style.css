@@ -21,7 +21,8 @@ body {
 header {
   margin-bottom: 50px;
   /* mix-blend-mode: hard-light; */
-  background-color: #3d7dca;
+  /* background-color: #3d7dca; */
+  background-color: hsl(240, 64%, 30%);
   width: 100%;
   display: flex;
   justify-content: center;

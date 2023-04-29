@@ -20,7 +20,7 @@ body {
 }
 header {
   margin-bottom: 50px;
-  mix-blend-mode: hard-light;
+  /* mix-blend-mode: hard-light; */
   background-color: #3d7dca;
   width: 100%;
   display: flex;
@@ -31,9 +31,20 @@ header img {
   /* filter: drop-shadow(0 0 16px rgb(70, 0, 128)); */
   /* filter: drop-shadow(0 0 10px rgb(244, 220, 4)); */
   transform: translateZ(100px);
+  padding: 20px;
 }
 
 header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.44);
+}
+header::after {
   content: "";
   position: absolute;
   top: 0;

@@ -21,7 +21,7 @@ const colours = {
 
 const pokeContainer = document.querySelector(`.container`);
 
-const numbOfPokemon = 151;
+const numbOfPokemon = 800;
 function createPokeCard(pokemon) {
   const pokeCard = document.createElement(`section`);
   pokeCard.classList.add(`card-container`);
@@ -32,6 +32,7 @@ function createPokeCard(pokemon) {
     console.log(a);
     console.log(a.ability.name);
   }
+
   pokeCard.innerHTML = `  
         <div class="card">
           <div class="card-front pokemon">
@@ -39,7 +40,7 @@ function createPokeCard(pokemon) {
             <div class="imgContainer">
               <img
                 src="${pokemon.data.sprites.other.dream_world.front_default}"
-                alt="${pokemon.data.name}"
+                alt="${pokemon.data.name}" loading = "lazy"
               />
               </div>
                <h1 class="name">${pokemon.data.name.toUpperCase()}</h1>
@@ -52,7 +53,7 @@ function createPokeCard(pokemon) {
              <div class="ability">
             <h4> Abilities:  </h4>
             <ul><li>${pokemon.data.abilities[0].ability.name}</li>
-            <li>${a.ability.name}</li>
+            <li class = "ability2">${a.ability.name}</li>
                     
             </ul>
                     
@@ -121,14 +122,31 @@ function createPokeCard(pokemon) {
 
           </div>
         </div>
-      `;
+      
+        `;
+
+  if (pokemon.data.sprites.other.dream_world.front_default === null) {
+    const imgContainer = pokeCard.querySelector(`.imgContainer`);
+    imgContainer.innerHTML = ` <img
+                src="${pokemon.data.sprites.other.home.front_shiny}"
+                alt="${pokemon.data.name}" loading = "lazy"
+              />`;
+  } else if (pokemon.data.sprites.other.home.front_shiny === null) {
+    imgContainer.innerHTML = ` <img
+                src="${pokemon.data.sprites.other.home.front_default}"
+                alt="${pokemon.data.name}" loading = "lazy"
+              />`;
+  }
+
+  if (a.ability.name === pokemon.data.abilities[0].ability.name) {
+    const ability2 = pokeCard.querySelector(`.ability2`);
+    ability2.innerText = ``;
+  }
 
   const getStats = pokemon.data.stats;
   const mappedStats = getStats.map((stat) => {
-    // console.log(`mystats`, { baseStat: stat.base_stat, name: stat.stat.name });
     return { baseStat: stat.base_stat, name: stat.stat.name };
   });
-  //   console.log(mappedStats);
 
   mappedStats.forEach((stat, index) => {
     const bar = pokeCard.querySelectorAll(".progress")[index];
@@ -137,17 +155,6 @@ function createPokeCard(pokemon) {
       return parseInt((stat.baseStat / maxStat) * 100);
     };
     bar.style.width = percentage() + `%`;
-    // console.log(percentage() + `%`);
-
-    //conditions to change color based off stat out of a max of 255
-
-    // if (percentage() <= Math.floor(30)) {
-    //   bar.style.backgroundColor = `rgba(255, 0, 0, 0.8)`; // stats <= 79
-    // } else if (percentage() > Math.floor(30) && percentage() < Math.floor(43)) {
-    //   bar.style.backgroundColor = `yellow`; // stat in between 80 and 109
-    // } else if (percentage() >= Math.floor(43)) {
-    //   bar.style.backgroundColor = `rgb(47, 255, 144)`; //stat >=110
-    // }
   });
 
   const type = document.querySelectorAll(`.type`);
@@ -185,6 +192,12 @@ function createPokeCard(pokemon) {
       e.style.color = colours.ghost;
     } else if (e.textContent === `dragon`) {
       e.style.color = colours.dragon;
+    } else if (e.textContent === `dark`) {
+      e.style.color = colours.dark;
+    } else if (e.textContent === `flying`) {
+      e.style.color = colours.flying;
+    } else if (e.textContent === `steel`) {
+      e.style.color = colours.steel;
     }
   }
 }
@@ -203,6 +216,7 @@ async function getPokemon(i) {
     await getPokemonData(i);
   }
 
+  document.addEventListener(`DOMContentLoaded`, flipCard);
   const card = document.querySelectorAll(".card");
   card.forEach((card) => card.addEventListener("click", flipCard));
   function flipCard() {

@@ -10,6 +10,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 body {
   /* background-color: #ffcb05; */
@@ -20,8 +21,6 @@ body {
 }
 header {
   margin-bottom: 50px;
-  /* mix-blend-mode: hard-light; */
-  /* background-color: #3d7dca; */
   background-color: hsl(240, 64%, 30%);
   width: 100%;
   display: flex;
@@ -29,8 +28,6 @@ header {
   perspective: 1000px;
 }
 header img {
-  /* filter: drop-shadow(0 0 16px rgb(70, 0, 128)); */
-  /* filter: drop-shadow(0 0 10px rgb(244, 220, 4)); */
   transform: translateZ(100px);
   padding: 20px;
 }
@@ -60,8 +57,6 @@ header::after {
   justify-content: center;
   flex-wrap: wrap;
   max-width: 1400px;
-  /* display: grid;
-  grid-template-columns: repeat(4, 1fr); */
   gap: 20px;
 }
 
@@ -91,30 +86,27 @@ header::after {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  /* background-color: rgba(0, 0, 0, 0.504); */
   background-color: rgba(0, 0, 0, 0.609);
-  /* mix-blend-mode: hard-light; */
 }
 .card img {
-  width: 200px;
+  width: 180px;
 }
 .name {
   /* color: #003a70; */
   margin-bottom: 5px;
-  /* margin-top: 20px; */
   font-family: var(--font-family);
   letter-spacing: 5px;
   color: rgb(255, 204, 0);
+  text-align: center;
 }
 
 .card-container {
   background-color: transparent;
   width: 320px;
-  height: 450px;
+  height: 470px;
+
   perspective: 1000px;
-  /* filter: drop-shadow(0 0 10px hsl(240, 64%, 30%)); */
-  transition: 0.3s ease;
-  /* box-shadow: 0 0 15px rgba(5, 0, 71, 0.6); */
+  transition: 0.2s ease;
 }
 
 .card {
@@ -124,15 +116,11 @@ header::after {
   transition: 0.8s ease-in-out;
   transform-style: preserve-3d;
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
   align-content: center;
   padding: 10px;
   border: 2px solid hsl(240, 64%, 30%);
   border-radius: 12px;
-
-  /* background-color: yellow; */
-  /* padding: 20px; */
 }
 
 .card-container:hover {
@@ -152,7 +140,6 @@ header::after {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   top: -10px;
-  /* padding: 10px; */
 }
 
 .card-front {
@@ -182,13 +169,17 @@ header::after {
   transform: rotateY(180deg);
   text-align: center;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 .card-back h4 {
   color: red;
   font-weight: 700;
   font-size: 24px;
-  /* margin-bottom: 10px; */
 }
 .card-back h1 {
   margin-bottom: 3px;
@@ -228,14 +219,11 @@ li::first-letter {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* gap: 10px; */
+
   text-align: left;
   background-color: rgba(0, 0, 0, 0.45);
   padding: 10px;
   border-radius: 5px;
-  /* background-size: contain;
-  background-repeat: no-repeat;
-  background-blend-mode: darken; */
 }
 
 .stat {
@@ -243,9 +231,8 @@ li::first-letter {
   display: flex;
   justify-content: space-between;
   align-content: center;
-  /* margin-top: -2.3px; */
+
   padding: 10px;
-  /* gap: 10px; */
 }
 
 .stat p::first-letter {
@@ -261,9 +248,8 @@ li::first-letter {
 }
 .progress {
   height: 13px;
-  /* background-color: rgb(47, 255, 144); */
+
   border-radius: 10px;
-  /* color: rgba(255, 0, 0, 0.85); */
 }
 
 .type {

@@ -130,46 +130,25 @@ function createPokeCard(pokemon) {
   });
   //   console.log(mappedStats);
 
-  const maxStat = 200;
-
   mappedStats.forEach((stat, index) => {
     const bar = pokeCard.querySelectorAll(".progress")[index];
-
+    const maxStat = 255;
     const percentage = function convert() {
       return parseInt((stat.baseStat / maxStat) * 100);
     };
     bar.style.width = percentage() + `%`;
     // console.log(percentage() + `%`);
 
-    if (percentage() <= 30) {
-      bar.style.backgroundColor = `rgba(255, 0, 0, 0.8)`;
-    } else if (percentage() > 30 && percentage() <= 45) {
-      bar.style.backgroundColor = `yellow`;
-    } else if (percentage() > 45) {
-      bar.style.backgroundColor = `rgb(47, 255, 144)`;
-    }
+    //conditions to change color based off stat out of a max of 255
+
+    // if (percentage() <= Math.floor(30)) {
+    //   bar.style.backgroundColor = `rgba(255, 0, 0, 0.8)`; // stats <= 79
+    // } else if (percentage() > Math.floor(30) && percentage() < Math.floor(43)) {
+    //   bar.style.backgroundColor = `yellow`; // stat in between 80 and 109
+    // } else if (percentage() >= Math.floor(43)) {
+    //   bar.style.backgroundColor = `rgb(47, 255, 144)`; //stat >=110
+    // }
   });
-}
-async function getPokemonData(id) {
-  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-  const pokemonData = await axios.get(url);
-  console.log(pokemonData);
-  console.log(pokemonData.data.sprites.front_shiny);
-  console.log(pokemonData.data.sprites.front_shiny);
-  console.log(pokemonData.data.name);
-
-  createPokeCard(pokemonData);
-}
-async function getPokemon(i) {
-  for (i = 1; i < numbOfPokemon; i++) {
-    await getPokemonData(i);
-  }
-
-  const card = document.querySelectorAll(".card");
-  card.forEach((card) => card.addEventListener("click", flipCard));
-  function flipCard() {
-    this.classList.toggle("flip");
-  }
 
   const type = document.querySelectorAll(`.type`);
 
@@ -207,6 +186,27 @@ async function getPokemon(i) {
     } else if (e.textContent === `dragon`) {
       e.style.color = colours.dragon;
     }
+  }
+}
+async function getPokemonData(id) {
+  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+  const pokemonData = await axios.get(url);
+  console.log(pokemonData);
+  console.log(pokemonData.data.sprites.front_shiny);
+  console.log(pokemonData.data.sprites.front_shiny);
+  console.log(pokemonData.data.name);
+
+  createPokeCard(pokemonData);
+}
+async function getPokemon(i) {
+  for (i = 1; i < numbOfPokemon; i++) {
+    await getPokemonData(i);
+  }
+
+  const card = document.querySelectorAll(".card");
+  card.forEach((card) => card.addEventListener("click", flipCard));
+  function flipCard() {
+    this.classList.toggle("flip");
   }
 }
 

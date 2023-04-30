@@ -49,7 +49,7 @@ function createPokeCard(pokemon) {
 
           </div>
           <div class="card-back pokemon">
-            <h1>${pokemon.data.name.toUpperCase()}</h1>
+            
              <div class="ability">
             <h4> Abilities:  </h4>
             <ul><li>${pokemon.data.abilities[0].ability.name}</li>

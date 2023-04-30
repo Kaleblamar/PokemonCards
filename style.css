@@ -60,36 +60,27 @@ header::after {
   gap: 20px;
 }
 
-.pokemon {
-  /* width: 175px; */
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  /* background-color: #3d7dca; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 10px;
-  margin: 10px;
-
-  position: relative;
-  transform-style: preserve-3d;
-  transition: 0.8s ease-in-out;
-}
-
 .imgContainer {
   /* background-color: #003a70; */
-  width: calc(100% - 5px);
-  height: 75%;
-  padding: 10px;
+  width: 100%;
+  height: 65%;
+  padding: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 20px;
+  border: 2px solid black;
   background-color: rgba(0, 0, 0, 0.609);
+  background-image: radial-gradient(
+    circle,
+    rgba(0, 22, 134, 0.609),
+    hsl(269, 100%, 25%),
+    rgba(0, 0, 0, 0.609)
+  );
 }
 .card img {
   width: 180px;
+  height: 80%;
 }
 .name {
   /* color: #003a70; */
@@ -103,7 +94,7 @@ header::after {
 .card-container {
   background-color: transparent;
   width: 320px;
-  height: 470px;
+  height: 400px;
 
   perspective: 1000px;
   transition: 0.2s ease;
@@ -118,7 +109,7 @@ header::after {
   display: flex;
   justify-content: center;
   align-content: center;
-  padding: 10px;
+  padding: 5px;
   border: 2px solid hsl(240, 64%, 30%);
   border-radius: 12px;
 }
@@ -139,7 +130,12 @@ header::after {
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  top: -10px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 12px;
+  padding: 10px;
 }
 
 .card-front {
@@ -153,7 +149,6 @@ header::after {
   flex-direction: column;
   justify-content: space-between;
   align-content: center;
-  gap: 20px;
 }
 
 .card-back {

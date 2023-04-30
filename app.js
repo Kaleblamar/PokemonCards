@@ -29,8 +29,8 @@ function createPokeCard(pokemon) {
 
   const abilities = pokemon.data.abilities;
   for (a of abilities) {
-    console.log(a);
-    console.log(a.ability.name);
+    // console.log(a);
+    // console.log(a.ability.name);
   }
 
   pokeCard.innerHTML = `  
@@ -134,6 +134,13 @@ function createPokeCard(pokemon) {
   } else if (pokemon.data.sprites.other.home.front_shiny === null) {
     imgContainer.innerHTML = ` <img
                 src="${pokemon.data.sprites.other.home.front_default}"
+                alt="${pokemon.data.name}" loading = "lazy"
+              />`;
+  } else if (pokemon.data.sprites.other.home.front_default === null) {
+    imgContainer.innerHTML = ` <img
+                src="${
+                  pokemon.data.sprites.other[`official-artwork`].front_default
+                }"
                 alt="${pokemon.data.name}" loading = "lazy"
               />`;
   }

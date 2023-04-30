@@ -30,6 +30,7 @@ header {
 header img {
   transform: translateZ(100px);
   padding: 20px;
+  filter: drop-shadow(0 0 10px black);
 }
 
 header::before {
@@ -81,6 +82,8 @@ header::after {
 .card img {
   width: 180px;
   height: 80%;
+  /* filter: drop-shadow(0 0 8px rgb(93, 0, 255)); */
+  filter: drop-shadow(0 0 8px rgb(0, 0, 0));
 }
 .name {
   /* color: #003a70; */
@@ -110,7 +113,8 @@ header::after {
   justify-content: center;
   align-content: center;
   padding: 5px;
-  border: 2px solid hsl(240, 64%, 30%);
+  /* border: 2px solid hsl(240, 64%, 30%); */
+  border: 2px solid rgb(170, 0, 255);
   border-radius: 12px;
 }
 
@@ -278,22 +282,20 @@ li::first-letter {
 .stat:nth-of-type(6) .progress {
   background-color: hotpink;
 }
-
-/* .stat:nth-of-type(1) p {
-  color: rgb(47, 255, 144);
+select {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 2;
+  outline: none;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #333;
+  border: none;
 }
-.stat:nth-of-type(2) p {
-  color: orangered;
+label {
+  position: absolute;
+  right: 10px;
+  top: 100px;
+  color: white;
 }
-.stat:nth-of-type(3) p {
-  color: orange;
-}
-.stat:nth-of-type(4) p {
-  color: mediumblue;
-}
-.stat:nth-of-type(5) p {
-  color: mediumslateblue;
-}
-.stat:nth-of-type(6) p {
-  color: hotpink;
-} */

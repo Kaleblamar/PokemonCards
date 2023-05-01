@@ -24,6 +24,8 @@ header {
   background-color: hsl(240, 64%, 30%);
   width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   perspective: 1000px;
 }
@@ -140,15 +142,15 @@ header::after {
   right: 0;
   border-radius: 12px;
   padding: 10px;
-}
-
-.card-front {
   background-image: linear-gradient(
     to bottom,
     rgb(42, 9, 78),
     hsl(240, 64%, 30%),
     rgb(42, 9, 78)
   );
+}
+
+.card-front {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -156,12 +158,6 @@ header::after {
 }
 
 .card-back {
-  background-image: linear-gradient(
-    to bottom,
-    rgb(42, 9, 78),
-    hsl(240, 64%, 30%),
-    rgb(42, 9, 78)
-  );
   /* color: rgb(255, 204, 0); */
   color: lightgrey;
   font-size: 18px;
@@ -283,19 +279,27 @@ li::first-letter {
   background-color: hotpink;
 }
 select {
-  position: absolute;
+  /* position: absolute;
   right: 10px;
-  top: 10px;
+  top: 10px; */
   z-index: 2;
   outline: none;
   padding: 5px;
   border-radius: 5px;
-  background-color: #333;
-  border: none;
+  color: #c7a008;
+  border: 2px solid rgb(170, 0, 255);
+  width: 400px;
+  padding: 10px;
+  background-image: linear-gradient(
+    45deg,
+    rgb(42, 9, 78),
+    hsl(240, 64%, 30%),
+    rgb(42, 9, 78)
+  );
+  font-size: 18px;
+  text-transform: uppercase;
+  opacity: 0.5;
 }
-label {
-  position: absolute;
-  right: 10px;
-  top: 100px;
-  color: white;
+select:hover {
+  cursor: pointer;
 }

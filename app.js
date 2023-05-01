@@ -20,8 +20,9 @@ const colours = {
 };
 
 const pokeContainer = document.querySelector(`.container`);
+const filter = document.querySelector(`#filter`);
 
-const numbOfPokemon = 800;
+const numbOfPokemon = 1000;
 function createPokeCard(pokemon) {
   const pokeCard = document.createElement(`section`);
   pokeCard.classList.add(`card-container`);
@@ -34,7 +35,7 @@ function createPokeCard(pokemon) {
   }
 
   pokeCard.innerHTML = `  
-        <div class="card">
+        <div class="card" data-type ="${pokemon.data.types[0].type.name}">
           <div class="card-front pokemon">
           <h4 class="type">${pokemon.data.types[0].type.name}</h4>
             <div class="imgContainer">
@@ -124,26 +125,30 @@ function createPokeCard(pokemon) {
         </div>
       
         `;
-
-  if (pokemon.data.sprites.other.dream_world.front_default === null) {
+  function checkForPicture() {
     const imgContainer = pokeCard.querySelector(`.imgContainer`);
-    imgContainer.innerHTML = ` <img
-                src="${pokemon.data.sprites.other.home.front_shiny}"
-                alt="${pokemon.data.name}" loading = "lazy"
-              />`;
-  } else if (pokemon.data.sprites.other.home.front_shiny === null) {
-    imgContainer.innerHTML = ` <img
-                src="${pokemon.data.sprites.other.home.front_default}"
-                alt="${pokemon.data.name}" loading = "lazy"
-              />`;
-  } else if (pokemon.data.sprites.other.home.front_default === null) {
-    imgContainer.innerHTML = ` <img
-                src="${
-                  pokemon.data.sprites.other[`official-artwork`].front_default
-                }"
-                alt="${pokemon.data.name}" loading = "lazy"
-              />`;
+    if (pokemon.data.sprites.other.dream_world.front_default === null) {
+      imgContainer.innerHTML = ` <img
+                  src="${pokemon.data.sprites.other.home.front_shiny}"
+                  alt="${pokemon.data.name}" loading = "lazy"
+                />`;
+    }
+    if (pokemon.data.sprites.other.home.front_shiny === null) {
+      imgContainer.innerHTML = ` <img
+                  src="${pokemon.data.sprites.other.home.front_default}"
+                  alt="${pokemon.data.name}" loading = "lazy"
+                />`;
+    }
+    if (pokemon.data.sprites.other.home.front_default === null) {
+      imgContainer.innerHTML = ` <img
+                  src="${
+                    pokemon.data.sprites.other[`official-artwork`].front_default
+                  }"
+                  alt="${pokemon.data.name}" loading = "lazy"
+                />`;
+    }
   }
+  checkForPicture();
 
   if (a.ability.name === pokemon.data.abilities[0].ability.name) {
     const ability2 = pokeCard.querySelector(`.ability2`);
@@ -207,6 +212,16 @@ function createPokeCard(pokemon) {
       e.style.color = colours.steel;
     }
   }
+  const cards = document.querySelectorAll(`.card`);
+  filter.addEventListener(`change`, (e) => {
+    cards.forEach((cards) => {
+      const cardType = cards.dataset.type;
+      if (e.target.value === cardType) pokeCard.style.display = `block`;
+
+      if (cardType != e.target.value) pokeCard.style.display = `none`;
+      if (e.target.value === `all`) pokeCard.style.display = `block`;
+    });
+  });
 }
 async function getPokemonData(id) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -224,11 +239,16 @@ async function getPokemon(i) {
   }
 
   document.addEventListener(`DOMContentLoaded`, flipCard);
-  const card = document.querySelectorAll(".card");
-  card.forEach((card) => card.addEventListener("click", flipCard));
+  const card = document.querySelectorAll(`.card`);
+  card.forEach((card) => card.addEventListener(`click`, flipCard));
   function flipCard() {
-    this.classList.toggle("flip");
+    this.classList.toggle(`flip`);
   }
 }
 
 getPokemon();
+
+//   if (e.target.value === e.textContent) pokeCard.style.display = `block`;
+
+//   if (e.textContent != e.target.value) pokeCard.style.display = `none`;
+//   if (e.target.value === `all`) pokeCard.style.display = `block`;

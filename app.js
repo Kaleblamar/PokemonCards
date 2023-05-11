@@ -247,8 +247,3 @@ async function getPokemon(i) {
 }
 
 getPokemon();
-
-//   if (e.target.value === e.textContent) pokeCard.style.display = `block`;
-
-//   if (e.textContent != e.target.value) pokeCard.style.display = `none`;
-//   if (e.target.value === `all`) pokeCard.style.display = `block`;

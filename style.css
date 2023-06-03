@@ -282,7 +282,7 @@ li::first-letter {
 .stat:nth-of-type(6) .progress {
   background-color: hotpink;
 }
-select {
+select{
   /* position: absolute;
   right: 10px;
   top: 10px; */
@@ -314,4 +314,65 @@ select:hover {
   select {
     width: 90%;
   }
+}
+
+
+/* =================================== */
+/* toggles switch */
+/* =================================== */
+
+.toggleBox{
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  padding: 20px;
+}
+
+input[type="checkbox"] {
+  position: relative;
+  margin-right: 25px;
+  width: 0;
+  
+ 
+}
+input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
+
+input[type="checkbox"]::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 40px;
+  border-radius: 10px;
+  /* background-color: rgb(11, 11, 135); */
+  background-color: red;
+  border: 1px solid rgb(170, 0, 255);
+  transition: 0.3s ease;
+}
+input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: white;
+  border-radius: 50%;
+  width: 20px;
+  z-index: 999;
+  transition: 0.4s ease;
+}
+input[type="checkbox"]:checked::before {
+  transform: translateX(100%);
+}
+
+input[type="checkbox"]:checked::after {
+  /* background-color: rgb(11, 11, 135); */
+  /* background-color: rgb(0, 47, 255); */
+  background-color: #0161f0;
 }

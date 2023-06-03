@@ -326,14 +326,33 @@ function loadMoreContent(){
  
 
 }
+const audio = document.querySelector(`audio`)
+const toggle = document.querySelector(`#toggleAudio`)
+toggle.addEventListener(`change`, toggleAudio)
+function toggleAudio(event){
+  if(event.target.checked){
+    audio.play();
+
+  }else{
+    audio.pause()
+  }
+}
 
 function bindFLipCard(){
+ 
   const card = document.querySelectorAll(`.card`);
   card.forEach((card) => card.addEventListener(`click`, flipCard));
 }
 
 function flipCard() {
-  this.classList.toggle(`flip`);
+  this.classList.toggle(`flip`)
+  if(toggle.checked) audio.play();
+ 
+
+
+
+
 }
+
 
 

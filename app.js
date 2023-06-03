@@ -19,10 +19,18 @@ const colours = {
   fairy: "#D685AD",
 };
 
+
+
+
 const pokeContainer = document.querySelector(`.container`);
 const filter = document.querySelector(`#filter`);
 
-const numbOfPokemon = 1000;
+const numbOfPokemon = 1010;
+let loadCard = 100;
+console.log(loadCard);
+
+
+
 function createPokeCard(pokemon) {
   const pokeCard = document.createElement(`section`);
   pokeCard.classList.add(`card-container`);
@@ -33,6 +41,12 @@ function createPokeCard(pokemon) {
     // console.log(a);
     // console.log(a.ability.name);
   }
+
+
+
+
+
+
 
   pokeCard.innerHTML = `  
         <div class="card" data-type ="${pokemon.data.types[0].type.name}">
@@ -125,6 +139,7 @@ function createPokeCard(pokemon) {
         </div>
       
         `;
+
   function checkForPicture() {
     const imgContainer = pokeCard.querySelector(`.imgContainer`);
     if (pokemon.data.sprites.other.dream_world.front_default === null) {
@@ -213,7 +228,10 @@ function createPokeCard(pokemon) {
     }
   }
   const cards = document.querySelectorAll(`.card`);
-  filter.addEventListener(`change`, (e) => {
+  
+  filter.addEventListener(`change`, filterCards) 
+
+  function filterCards(e) {
     cards.forEach((cards) => {
       const cardType = cards.dataset.type;
       if (e.target.value === cardType) pokeCard.style.display = `block`;
@@ -221,8 +239,14 @@ function createPokeCard(pokemon) {
       if (cardType != e.target.value) pokeCard.style.display = `none`;
       if (e.target.value === `all`) pokeCard.style.display = `block`;
     });
-  });
-}
+  };
+
+
+
+
+
+
+};
 async function getPokemonData(id) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
   const pokemonData = await axios.get(url);
@@ -233,17 +257,83 @@ async function getPokemonData(id) {
 
   createPokeCard(pokemonData);
 }
+
+//was i < numbOfPokemon
 async function getPokemon(i) {
-  for (i = 1; i < numbOfPokemon; i++) {
-    await getPokemonData(i);
+  if(loadCard > 100){
+    for(i = loadCard - 99; i < loadCard; i++){
+      await getPokemonData(i);
+      
+  
+    }
+  }
+  else{
+  for (i = 1; i <= loadCard; i++) {
+  await getPokemonData(i);
+  
+}
+ 
+  }
+ bindFLipCard();
+
+
+
+
+}
+document.addEventListener(`DOMContentLoaded`, ()=>{
+  getPokemon();
+
+});
+
+
+//new test infinite scrolling
+
+window.addEventListener(`scroll`, scrollHandler)
+
+function scrollHandler(){
+  const windowHeight = window.innerHeight;
+  const fullHeight = document.documentElement.scrollHeight;
+  const scroll = document.documentElement.scrollTop;
+
+  if(windowHeight + scroll >= fullHeight){
+    loadMoreContent();
+   
+    
+    console.log(`im scrolling`)
   }
 
-  document.addEventListener(`DOMContentLoaded`, flipCard);
-  const card = document.querySelectorAll(`.card`);
-  card.forEach((card) => card.addEventListener(`click`, flipCard));
-  function flipCard() {
-    this.classList.toggle(`flip`);
+
+  
+};
+
+function loadMoreContent(){
+  if(loadCard > numbOfPokemon){
+    loadCard = numbOfPokemon
+    getPokemon().then(() => {
+      bindFLipCard();
+     });
+    window.removeEventListener(`scroll`, scrollHandler)
+    console.log("I'm Done")
+  }else{
+  loadCard += 100;
+  console.log(`loadCard`, loadCard);
+   getPokemon().then(() => {
+    bindFLipCard();
+    
+   });
+
   }
+ 
+
 }
 
-getPokemon();
+function bindFLipCard(){
+  const card = document.querySelectorAll(`.card`);
+  card.forEach((card) => card.addEventListener(`click`, flipCard));
+}
+
+function flipCard() {
+  this.classList.toggle(`flip`);
+}
+
+
